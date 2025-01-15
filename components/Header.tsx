@@ -12,7 +12,7 @@ export default function Header() {
                     <Link href="/"><span className="text-[22px] font-satoshi-bold text-white">Snapzion</span></Link>
                 </div>
                 <div className='flex gap-8 items-center'>
-                <Link className='text-white font-satoshi-medium text-md text-center' href='/pricing'>Pricing</Link>
+                {/* <Link className='text-white font-satoshi-medium text-md text-center' href='/pricing'>Pricing</Link> */}
                     <SignedOut>
                     <SignInButton mode="modal">
                         <button className="bg-[#DDFF00] font-satoshi-medium text-black text-sm px-4 py-2 rounded-md hover:bg-[#DDFF02] transition-colors flex gap-2 shadow-neon-green">

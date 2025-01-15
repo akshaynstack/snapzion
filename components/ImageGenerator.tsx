@@ -144,22 +144,9 @@ export default function ImageGenerator() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <Card className="p-6 bg-gradient-to-b from-[#1E1E1E] to-[#000000] shadow-neon-green border-none">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <div className="flex items-center justify-between mb-4">
-            <TabsList>
-              <TabsTrigger value="generate" className="flex items-center gap-2">
-                <Wand2 className="h-4 w-4" />
-                Generate
-              </TabsTrigger>
-              <TabsTrigger value="history" className="flex items-center gap-2">
-                <History className="h-4 w-4" />
-                History
-              </TabsTrigger>
-            </TabsList>
-          </div>
-
           <TabsContent value="generate" className="space-y-6">
             <form onSubmit={generateImage} className="space-y-4">
-              <div className="flex gap-4">
+              <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1 relative">
                   <Input
                     value={prompt}
@@ -201,7 +188,7 @@ export default function ImageGenerator() {
             >
 
 
-              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6">
                 {isLoading && (
                   <Skeleton className="h-full w-full aspect-square" />
                 )}
@@ -215,11 +202,11 @@ export default function ImageGenerator() {
                       />
                     </div>
                     <div className="p-4 space-y-3">
-                      <div className="flex gap-2 flex-wrap">
+                      <div className="flex gap-2 flex-row">
                         <Badge variant="secondary">{image.style}</Badge>
                         <Badge variant="outline">{image.size}</Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground line-clamp-2">{image.prompt}</p>
+                      <p className="text-sm text-muted-foreground line-clamp-2 text-left">{image.prompt}</p>
                       <p className="text-xs text-muted-foreground">{new Date(image.timestamp).toLocaleString()}</p>
                       <div className="flex gap-2">
                         <Button variant="secondary" size="sm" onClick={() => downloadImage(image.url)} className="flex-1">
@@ -236,58 +223,6 @@ export default function ImageGenerator() {
                 ))}
               </div>
             </InfiniteScroll>
-          </TabsContent>
-
-          <TabsContent value="history">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-satoshi-semibold text-white">Generation History</h3>
-                {generatedImages.length > 0 && (
-                  <Button variant="destructive" size="sm">
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Clear History
-                  </Button>
-                )}
-              </div>
-              <ScrollArea className="h-[600px] rounded-lg border">
-                {generatedImages.length === 0 ? (
-                  <div className="flex flex-col items-center justify-center h-full text-center p-8">
-                    <History className="h-12 w-12 text-muted-foreground mb-4" />
-                    <p className="text-muted-foreground">No images generated yet</p>
-                  </div>
-                ) : (
-                  <div className="p-4 space-y-4">
-                    {generatedImages.map((image, index) => (
-                      <Card key={index} className="flex gap-4 p-4">
-                        <div className="w-24 h-24 flex-shrink-0">
-                          <img
-                            src={image.url}
-                            alt={image.prompt}
-                            className="w-full h-full object-cover rounded-lg"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-medium line-clamp-2">{image.prompt}</p>
-                          <div className="flex gap-2 mt-2">
-                            <Badge variant="secondary">{image.style}</Badge>
-                            <Badge variant="outline">{image.size}</Badge>
-                          </div>
-                          <p className="text-xs text-muted-foreground mt-2">{new Date(image.timestamp).toLocaleString()}</p>
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          <Button variant="ghost" size="sm" onClick={() => downloadImage(image.url)}>
-                            <Download className="h-4 w-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" onClick={() => shareImage(image.url)}>
-                            <Share2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                )}
-              </ScrollArea>
-            </div>
           </TabsContent>
         </Tabs>
       </Card>

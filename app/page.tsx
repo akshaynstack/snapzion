@@ -11,7 +11,7 @@ export default function Home() {
     <main className="min-h-screen mx-auto pb-12">
       <Header />
       <div className="container px-4 py-12">
-        <div className="container px-6 pt-12 pb-12 text-center relative z-20">
+        <div className="container px-0 md:px-6 pt-12 pb-12 text-center relative z-20">
           <div className="inline-block mb-6">
               <span className="bg-[#e1ff00]/10 text-[#e1ff00] px-4 py-2 rounded-full text-sm font-satoshi-bold z-20">
                 #1 Productivity Software
