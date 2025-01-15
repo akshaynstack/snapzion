@@ -1,13 +1,7 @@
 import { NextResponse } from 'next/server';
-import { headers } from 'next/headers';
 import OpenAI from "openai";
 
 export const dynamic = 'force-dynamic';
-
-const RATE_LIMIT = 100; // for security purposes
-const RATE_LIMIT_WINDOW = 24 * 60 * 60 * 1000; // 24 hours
-
-const userRequests = new Map<string, { count: number; lastReset: number }>();
 
 // Initialize OpenAI client
 const openai = new OpenAI({
@@ -17,24 +11,6 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-    // Basic rate limiting
-    const headersList = headers();
-    const ip = headersList.get('x-forwarded-for') || 'unknown';
-    
-    const now = Date.now();
-    const userLimit = userRequests.get(ip) || { count: 0, lastReset: now };
-
-    if (now - userLimit.lastReset > RATE_LIMIT_WINDOW) {
-      userLimit.count = 0;
-      userLimit.lastReset = now;
-    }
-
-    if (userLimit.count >= RATE_LIMIT) {
-      return NextResponse.json(
-        { error: 'Rate limit exceeded. Please try again tomorrow.' },
-        { status: 429 }
-      );
-    }
 
     const { prompt } = await req.json();
 
@@ -57,13 +33,13 @@ export async function POST(req: Request) {
       messages: [{ role: "user", content: prompt }],
     });
 
+    // Log the entire response from OpenAI
+    // console.log('OpenAI API Response:', completion);
+
     const content = completion.choices[0].message.content;
     if (!content) {
       throw new Error('No content in response');
     }
-
-    userLimit.count++;
-    userRequests.set(ip, userLimit);
 
     return NextResponse.json({ content });
   } catch (error) {
