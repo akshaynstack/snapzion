@@ -9,7 +9,7 @@ export default function Header() {
             <nav className="container mx-auto px-6 py-6 flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                     <Zap className="w-6 h-6 text-[#DDFF00]" />
-                    <Link href="/"><span className="text-[22px] font-satoshi-bold text-white">Sanpzion</span></Link>
+                    <Link href="/"><span className="text-[22px] font-satoshi-bold text-white">Snapzion</span></Link>
                 </div>
                 <div className='flex gap-8 items-center'>
                 <Link className='text-white font-satoshi-medium text-md text-center' href='/pricing'>Pricing</Link>

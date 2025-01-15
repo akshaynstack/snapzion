@@ -197,11 +197,14 @@ export default function ImageGenerator() {
               next={() => loadMore(generatedImages.length)}  // Pass the number of items to loadMore
               hasMore={status === "CanLoadMore"}
               loader={<Skeleton className="h-4 w-3/4" />}
-              endMessage={<p style={{ textAlign: 'center' }}>No more images to load</p>}
+              endMessage={<p style={{ textAlign: 'center', color: 'white', paddingTop: '40px' }}>No more images to load</p>}
             >
 
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {isLoading && (
+                  <Skeleton className="h-full w-full aspect-square" />
+                )}
                 {generatedImages.map((image, index) => (
                   <Card key={index} className="overflow-hidden group">
                     <div className="aspect-square relative">
