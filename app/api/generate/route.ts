@@ -11,7 +11,6 @@ const openai = new OpenAI({
 
 export async function POST(req: Request) {
   try {
-
     const { prompt } = await req.json();
 
     if (!prompt) {
@@ -28,24 +27,24 @@ export async function POST(req: Request) {
       );
     }
 
+    // Make the API request
     const completion = await openai.chat.completions.create({
-      model: process.env.OPENAI_MODEL_NAME || "flux",
+      model: process.env.OPENAI_MODEL_NAME || "Image-Generator",
       messages: [{ role: "user", content: prompt }],
     });
 
-    // Log the entire response from OpenAI
-    // console.log('OpenAI API Response:', completion);
+    // Convert the entire response to plain text
+    const responseText = JSON.stringify(completion);
 
-    const content = completion.choices[0].message.content;
-    if (!content) {
-      throw new Error('No content in response');
-    }
+    // Extract and sanitize URLs
+    const urlRegex = /(https?:\/\/[^\s)"]+)/g;
+    const rawUrls = responseText.match(urlRegex) || [];
+    const sanitizedUrls = rawUrls.map(url => url.replace(/[\\)"]/g, ''));
 
-    return NextResponse.json({ content });
+    return NextResponse.json({ urls: sanitizedUrls });
   } catch (error) {
-    console.error('Image generation error:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'Failed to generate image' },
+      { error: error instanceof Error ? error.message : 'Failed to process the request' },
       { status: 500 }
     );
   }

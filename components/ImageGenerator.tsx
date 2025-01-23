@@ -52,10 +52,10 @@ export default function ImageGenerator() {
       toast.error("Please enter a prompt");
       return;
     }
-
+  
     setIsLoading(true);
     setError(null);
-
+  
     try {
       const response = await fetch("/api/generate", {
         method: "POST",
@@ -66,24 +66,23 @@ export default function ImageGenerator() {
           size: selectedSize,
         }),
       });
-
+  
       if (!response.ok) {
         throw new Error("Failed to generate image");
       }
-
+  
       const data = await response.json();
-      const urlPattern = /!\[\]\((https?:\/\/[^\s]+)\)/;
-      const match = data.content.match(urlPattern);
-
-      if (match && match[1]) {
+  
+      // Check if there are URLs in the response
+      if (data.urls && data.urls.length > 0) {
         const newImage: GeneratedImage = {
-          url: match[1],
+          url: data.urls[0], // Use the first URL from the response
           prompt,
           timestamp: String(Date.now()),
           style: selectedStyle,
           size: selectedSize,
         };
-
+  
         // Call the Convex mutation to save the image
         await saveImageMutation({
           url: newImage.url,
@@ -91,7 +90,7 @@ export default function ImageGenerator() {
           style: newImage.style ?? "realistic",
           size: newImage.size ?? "1024x768",
         });
-
+  
         toast.success("Image generated successfully!");
         setPrompt(""); // Clear the prompt after generation
       } else {
@@ -103,7 +102,7 @@ export default function ImageGenerator() {
     } finally {
       setIsLoading(false);
     }
-  };
+  };  
 
   const downloadImage = async (url: string) => {
     try {
