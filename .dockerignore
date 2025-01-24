@@ -1,4 +1,7 @@
 node_modules
 npm-debug.log
 .env
+.env.local
 .next
+.git
+.vscode

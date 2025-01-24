@@ -1,23 +1,35 @@
-# Use Node.js LTS image as the base
-FROM node:18-alpine
+# Stage 1: Build the app
+FROM node:18-alpine AS builder
 
-# Set the working directory inside the container
+# Set working directory inside the container
 WORKDIR /app
 
-# Copy package files to install dependencies first (for efficient caching)
+# Copy dependency files first for efficient caching
 COPY package.json package-lock.json ./
 
-# Install project dependencies
+# Install dependencies
 RUN npm install
 
-# Copy the rest of the project files into the container
+# Copy all project files
 COPY . .
 
 # Build the Next.js app
 RUN npm run build
 
-# Expose the default Next.js port
+# Stage 2: Create a minimal image to run the app
+FROM node:18-alpine
+
+# Set working directory inside the container
+WORKDIR /app
+
+# Copy only the built files from Stage 1
+COPY --from=builder /app ./
+
+# Install only production dependencies
+RUN npm install --production
+
+# Expose the port Next.js runs on
 EXPOSE 3000
 
-# Start the application in production mode
+# Start the app
 CMD ["npm", "start"]
