@@ -10,8 +10,8 @@ COPY package.json package-lock.json ./
 # Install dependencies
 RUN npm install
 
-# Copy all project files
-COPY . .
+# Copy all project files, including .env.local
+COPY . . 
 
 # Build the Next.js app
 RUN npm run build
@@ -27,6 +27,9 @@ COPY --from=builder /app ./
 
 # Install only production dependencies
 RUN npm install --production
+
+# Copy .env.local into the container
+COPY .env.local .env.local
 
 # Expose the port Next.js runs on
 EXPOSE 3000
