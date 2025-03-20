@@ -1,7 +1,7 @@
 # Snapzion
 
 <p align="center">
-  An open source project that can generate high-quality images using Image AI models. Unlimited images per day. No rate limits.
+  An open source project that can generate realistic high-quality images using Image AI models. Unlimited images per day. No rate limits.
 </p>
 
 ## Tech Stack
