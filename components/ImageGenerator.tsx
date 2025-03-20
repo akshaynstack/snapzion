@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useMutation, usePaginatedQuery } from 'convex/react';
+import { useMutation, usePaginatedQuery, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -31,6 +31,7 @@ interface GeneratedImage {
 }
 
 export default function ImageGenerator() {
+
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -48,6 +49,7 @@ export default function ImageGenerator() {
 
   const generateImage = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!prompt.trim()) {
       toast.error("Please enter a prompt");
       return;
@@ -66,10 +68,17 @@ export default function ImageGenerator() {
           size: selectedSize,
         }),
       });
+
+      if (response.status === 403) {
+        toast.error("Only Pro users can generate images");
+        return;
+      }
   
       if (!response.ok) {
         throw new Error("Failed to generate image");
       }
+
+      
   
       const data = await response.json();
   

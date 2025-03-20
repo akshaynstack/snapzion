@@ -42,33 +42,6 @@ export const getUser = query({
   },
 });
 
-// export const upgradeToPro = mutation({
-//   args: {
-//     userId: v.string(),
-//     email: v.string(),
-//     lemonSqueezyCustomerId: v.string(),
-//     lemonSqueezyOrderId: v.string(),
-//     amount: v.number(),
-//   },
-//   handler: async (ctx, args) => {
-//     const user = await ctx.db
-//       .query("users")
-//       .filter((q) => q.eq(q.field("email"), args.email))
-//       .first();
-
-//     if (!user) throw new Error("User not found");
-
-//     await ctx.db.patch(user._id, {
-//       isPro: true,
-//       proSince: Date.now(),
-//       lemonSqueezyCustomerId: args.lemonSqueezyCustomerId,
-//       lemonSqueezyOrderId: args.lemonSqueezyOrderId,
-//     });
-
-//     return { success: true };
-//   },
-// });
-
 export const upgradeToPro = mutation({
   args: {
     userId: v.string(),
@@ -87,5 +60,18 @@ export const upgradeToPro = mutation({
     });
 
     return { success: true };
+  },
+});
+
+export const fetchImages = query({
+  args: { userId: v.string() },
+  handler: async (ctx, args) => {
+    if (!args.userId) return [];
+
+    return await ctx.db
+      .query("images")
+      .filter((q) => q.eq(q.field("_id"), args.userId))
+      .order("desc")
+      .take(10);
   },
 });
