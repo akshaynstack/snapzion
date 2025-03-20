@@ -13,7 +13,6 @@ export async function createCheckoutSession(userId: string): Promise<string> {
         product_id: PRODUCT_ID,
         request_id: userId, // Use userId to track the payment
         success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/pricing`,
-        cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/pricing`,
       },
       {
         headers: { 'x-api-key': CREEM_API_KEY },
