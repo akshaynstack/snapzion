@@ -24,8 +24,8 @@ export default function PurchaseButton({ userId }: PurchaseButtonProps) {
   };
 
   return (
-    <button onClick={handlePurchase} disabled={isPending}>
-      {isPending ? 'Processing...' : 'Buy Now'}
+    <button onClick={handlePurchase} disabled={isPending} className="bg-[#DDFF00] font-satoshi-medium text-black text-sm px-6 py-4 rounded-md hover:bg-[#DDFF02] transition-colors flex gap-2 shadow-neon-green">
+      {isPending ? 'Processing...' : 'Upgrade to Lifetime'}
     </button>
   );
 }
