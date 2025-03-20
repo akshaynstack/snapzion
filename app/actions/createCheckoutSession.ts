@@ -12,8 +12,8 @@ export async function createCheckoutSession(userId: string): Promise<string> {
       {
         product_id: PRODUCT_ID,
         request_id: userId, // Use userId to track the payment
-        // success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/pricing`,
-        success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/updateProStatus?request_id=${userId}`,
+        success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/pricing`,
+        // success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/updateProStatus?request_id=${userId}`,
       },
       {
         headers: { 'x-api-key': CREEM_API_KEY },
