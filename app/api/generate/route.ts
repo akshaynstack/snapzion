@@ -33,6 +33,9 @@ export async function POST(req: Request) {
       messages: [{ role: "user", content: prompt }],
     });
 
+
+    console.log(completion);
+
     // Convert the entire response to plain text
     const responseText = JSON.stringify(completion);
 

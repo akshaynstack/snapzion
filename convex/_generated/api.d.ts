@@ -15,7 +15,7 @@ import type {
 } from "convex/server";
 import type * as http from "../http.js";
 import type * as image from "../image.js";
-import type * as lemonSqueezy from "../lemonSqueezy.js";
+import type * as updateProStatus from "../updateProStatus.js";
 import type * as users from "../users.js";
 
 /**
@@ -29,7 +29,7 @@ import type * as users from "../users.js";
 declare const fullApi: ApiFromModules<{
   http: typeof http;
   image: typeof image;
-  lemonSqueezy: typeof lemonSqueezy;
+  updateProStatus: typeof updateProStatus;
   users: typeof users;
 }>;
 export declare const api: FilterApi<

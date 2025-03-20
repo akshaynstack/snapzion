@@ -9,6 +9,7 @@ import FeatureCategory from "./_components/FeatureCategory";
 import FeatureItem from "./_components/FeatureItem";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
 import UpgradeButton from "./_components/UpgradeButton";
+import PurchaseButton from "./_components/PurchaseButton";
 import LoginButton from "@/components/LoginButton";
 
 async function PricingPage() {
@@ -53,7 +54,7 @@ async function PricingPage() {
                   <div className="flex items-baseline justify-center gap-2 mb-4">
                     <span className="text-2xl text-gray-400">$</span>
                     <span className="text-6xl font-semibold bg-gradient-to-r from-gray-100 to-gray-300 text-transparent bg-clip-text">
-                      19
+                      5
                     </span>
                     <span className="text-xl text-gray-400">one-time</span>
                   </div>
@@ -72,7 +73,8 @@ async function PricingPage() {
                 {/* CTA */}
                 <div className="flex justify-center">
                   <SignedIn>
-                    <UpgradeButton />
+                    {/* <UpgradeButton /> */}
+                    <PurchaseButton userId={convexUser?.userId!} />
                   </SignedIn>
 
                   <SignedOut>
