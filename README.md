@@ -2,7 +2,7 @@
 
 ![Snapzion](assets/og.PNG)
 
-<p align="center">
+<p>
   An open source project that can generate realistic high-quality images using Image AI models. Unlimited images per day. No rate limits.
 </p>
 
@@ -24,3 +24,14 @@
 ## Support Us
 
 If you love Snapzion and want to help us continue improving and upgrading our servers, consider becoming pro lifetime member on our website [https://snapzion.com/](https://snapzion.com/). Your contributions will ensure that we can keep delivering this powerful tool to the community.
+
+## Examples
+
+![Snapzion](assets/results/01.png)
+![Snapzion](assets/results/02.png)
+![Snapzion](assets/results/03.png)
+![Snapzion](assets/results/04.png)
+![Snapzion](assets/results/05.jpeg)
+![Snapzion](assets/results/06.jpeg)
+![Snapzion](assets/results/07.jpeg)
+![Snapzion](assets/results/08.jpeg)
