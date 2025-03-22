@@ -1,6 +1,6 @@
 # Snapzion
 
-![Snapzion](https://raw.githubusercontent.com/akshaynstack/snapzion/main/assets/og.png)
+![Snapzion](assets/og.png)
 
 <p align="center">
   An open source project that can generate realistic high-quality images using Image AI models. Unlimited images per day. No rate limits.
