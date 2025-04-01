@@ -54,6 +54,7 @@ export default function Home() {
         </div>
       </div>
       <div id="image-generator">
+        <p className="text-gray-400 text-sm text-center mb-6">Copyright © {new Date().getFullYear()} Snapzion. All rights reserved. Designed by <a className="text-[#e1ff00]" href="https://www.behance.net/arunr72" target="_blank" rel="noopener noreferrer">Arun</a></p>
       <ImageGenerator />
       </div>
     </main>
