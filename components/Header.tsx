@@ -1,6 +1,7 @@
 import { Zap, User, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { PersonFilledIcon } from '@shopify/polaris-icons';
 
 export default function Header() {
 
@@ -12,17 +13,16 @@ export default function Header() {
                     <Link href="/"><span className="text-[22px] font-satoshi-bold text-white">Snapzion</span></Link>
                 </div>
                 <div className='flex gap-8 items-center'>
-                    {/* <Link className='text-white font-satoshi-medium text-md text-center' href='/pricing'>Pricing</Link> */}
                     <SignedOut>
                     <SignInButton mode="modal">
-                        <button className="bg-[#DDFF00] font-satoshi-medium text-black text-sm px-4 py-2 rounded-md hover:bg-[#DDFF02] transition-colors flex gap-2 shadow-neon-green">
-                            <User className="w-5 h-5 text-black" />Register / Login
+                        <button className="bg-[#DDFF00] font-semibold text-black text-sm px-4 py-2 rounded-md hover:bg-[#DDFF02] transition-colors flex gap-2 shadow-neon-green">
+                            <PersonFilledIcon className="w-5 h-5 text-black" />Sign Up
                         </button>
                     </SignInButton>
                     </SignedOut>
                     <SignedIn>
                         <SignOutButton>
-                            <button className="bg-[#DDFF00] font-satoshi-medium text-black text-sm px-4 py-2 rounded-md hover:bg-[#DDFF02] transition-colors flex gap-2 shadow-neon-green">
+                            <button className="bg-[#DDFF00] font-semibold text-black text-sm px-4 py-2 rounded-md hover:bg-[#DDFF02] transition-colors flex gap-2 shadow-neon-green">
                                 <LogOut className="w-5 h-5 text-black" />Logout
                             </button>
                         </SignOutButton>

@@ -5,22 +5,18 @@ import {
   Loader2,
   Download,
   Share2,
-  Image as ImageIcon,
-  Wand2,
-  History,
-  Trash2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { toast } from "sonner";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useMutation, usePaginatedQuery, useQuery } from 'convex/react';
+import { useMutation, usePaginatedQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { ImageMagicIcon, ImageIcon } from '@shopify/polaris-icons';
 
 interface GeneratedImage {
   url: string;
@@ -150,10 +146,7 @@ export default function ImageGenerator() {
 
   return (
     <div className="space-y-6 max-w-7xl mx-auto">
-      <Card className="p-6 bg-gradient-to-b from-[#1E1E1E] to-[#000000] shadow-neon-green border-none">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsContent value="generate" className="space-y-6">
-            <form onSubmit={generateImage} className="space-y-4">
+      <form onSubmit={generateImage} className="space-y-4 p-2 md:p-0">
               <div className="flex flex-col md:flex-row gap-4">
                 <div className="flex-1 relative">
                   <Input
@@ -161,25 +154,30 @@ export default function ImageGenerator() {
                     onChange={(e) => setPrompt(e.target.value)}
                     placeholder="Describe the image you want to generate..."
                     disabled={isLoading}
-                    className="pr-12"
+                    className="pr-12 p-5 rounded-[14px]"
                   />
                   <ImageIcon className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                 </div>
-                <Button type="submit" disabled={isLoading || !prompt} className="min-w-[120px] bg-[#DDFF00] text-black hover:bg-[#DDFF02]">
+                <Button type="submit" disabled={isLoading || !prompt} className="min-w-[120px] bg-[#DDFF00] text-black hover:bg-[#DDFF02] rounded-[14px] font-semibold p-5">
                   {isLoading ? (
                     <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                       Generating...
                     </>
                   ) : (
                     <>
-                      <Wand2 className="mr-2 h-4 w-4" />
+                      <ImageMagicIcon className="mr-2 h-5 w-5" />
                       Generate
                     </>
                   )}
                 </Button>
               </div>
             </form>
+      <Card className="p-6 bg-gradient-to-b from-[#1E1E1E] to-[#000000] shadow-neon-green border-none">
+        
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <TabsContent value="generate" className="space-y-6">
+            
 
             {error && (
               <div className="text-destructive text-center p-4 rounded-lg bg-destructive/10">

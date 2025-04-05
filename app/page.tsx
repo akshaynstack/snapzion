@@ -30,8 +30,8 @@ export default function Home() {
 
           <div className="flex flex-col items-center space-y-4">
             <Link href="/pricing" passHref style={{scrollBehavior:'smooth'}}>
-              <button className="bg-[#e1ff00] hover:bg-[#DDFF02] text-black px-8 py-3 rounded-md font-medium hover:bg-[#c8e600] transition-colors flex items-center space-x-2 relative z-20">
-                <Zap className="w-5 h-5" />
+              <button className="bg-[#e1ff00] font-semibold hover:bg-[#DDFF02] text-black px-8 py-3 rounded-[12px] font-medium hover:bg-[#c8e600] transition-colors flex items-center space-x-2 relative z-20">
+                <Zap className="w-5 h-5 font-semibold" />
                 <span>Purchase for Lifetime</span>
               </button>
             </Link>
